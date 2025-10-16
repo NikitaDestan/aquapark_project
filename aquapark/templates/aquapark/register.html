@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Регистрация - Аквапарк</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: linear-gradient(135deg, #007cba, #00bcd4); height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .register-container { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #007cba; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #005a87; }
+        .messages { margin-bottom: 20px; }
+        .error { background: #ffebee; color: #c62828; padding: 10px; border-radius: 5px; }
+        .success { background: #e8f5e8; color: #2e7d32; padding: 10px; border-radius: 5px; }
+        .login-link { text-align: center; margin-top: 20px; }
+        .errorlist { color: #c62828; margin: 0; padding: 0; list-style: none; }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2 style="text-align: center; color: #007cba;">🏊 Регистрация</h2>
+        
+        <div class="messages">
+            {% for message in messages %}
+                <div class="{% if message.tags == 'error' %}error{% else %}success{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        
+<form method="post">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        <label for="id_username">Логин:</label>
+        {{ form.username }}
+        {{ form.username.errors }}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_email">Email:</label>
+        {{ form.email }}
+        {{ form.email.errors }}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_first_name">Имя:</label>
+        {{ form.first_name }}
+        {{ form.first_name.errors }}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_last_name">Фамилия:</label>
+        {{ form.last_name }}
+        {{ form.last_name.errors }}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_phone">Телефон:</label>
+        {{ form.phone }}
+        {{ form.phone.errors }}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_password1">Пароль:</label>
+        {{ form.password1 }}
+        {{ form.password1.errors }}
+    </div>
+    
+    <div class="form-group">
+        <label for="id_password2">Подтверждение пароля:</label>
+        {{ form.password2 }}
+        {{ form.password2.errors }}
+    </div>
+    
+    <button type="submit">Зарегистрироваться</button>
+</form>
+        
+        <div class="login-link">
+            <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
+        </div>
+    </div>
+</body>
+</html>
